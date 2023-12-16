@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alpine js Modal</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body>
+        <div x-data="rootApp">
+            <button @click="isOpen = true" class="shadow px-6 py-2 rounded-md bg-purple-600 hover:bg-opacity-95 text-white">Toggle Modal</button>
+            <!-- Backdrop -->
+            <template x-teleport="body">
+                <div x-show="isOpen" class="fixed flex justify-center items-center left-0 top-0 right-0 bottom-0 z-10 bg-black/50">
+                    <!-- Dialog -->
+                    <div @click.outside="isOpen = false" class="w-[90%] md:w-1/2 bg-white rounded-lg" x-show="isOpen" x-transition>
+                        <!-- Modal Title -->
+                        <div class="py-2 px-4 text-lg font-semibold bg-gray-100 rounded-t-lg flex items-center justify-between">
+                            <h2>Modal Title</h2>
+                            <button @click="isOpen = false">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <!-- Modal Body -->
+                        <div class="p-4">
+                            Modal Content
+                        </div>
+                        <!-- Modal Footer -->
+                        <div class="py-2 px-4 text-lg font-semibold bg-gray-100 rounded-b-lg flex justify-end">
+                            <button @click="accept" class="shadow px-3 py-1 rounded-md bg-emerald-600 hover:bg-opacity-95 text-white mr-2">
+                                Accept
+                            </button>
+                            <button class="shadow px-3 py-1 rounded-md bg-gray-300 hover:bg-opacity-95 text-gray-800">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <script>
+         document.addEventListener('alpine:init', () => {
+             Alpine.data('rootApp', () => ({
+                 isOpen: false,
+                 accept() {
+                     console.log('accepted');
+                 }
+             }));
+         });
+         { isOpen: false }
+        </script>
+    </body>
+</html>

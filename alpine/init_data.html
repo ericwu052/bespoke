@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alpine js initial data</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    </head>
+    <body>
+        <div x-data="data1">
+            <button x-on:click="increment">Increment</button>
+
+            <span x-text="count"></span>
+        </div>
+        <script>
+         document.addEventListener('alpine:init', () => {
+             Alpine.data('data1', () => ({
+                 count: 0,
+                 increment() {
+                     this.count = this.count + 1;
+                 }
+             }));
+         })
+        </script>
+    </body>
+</html>

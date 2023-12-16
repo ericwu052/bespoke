@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Alpine js Accordion</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body>
+        <div x-data="accordionData">
+            <template x-for="item in items">
+                <div>
+                    <div @click="selectItem(item)"
+                         class="py-1 px-2 bg-gray-50 border cursor-pointer hover:text-blue-400 transition-all font-semibold flex justify-between items-center">
+                        <span x-text="item.title"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all" :class="{'rotate-90': activeItem === item }">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </div>
+                    <div x-show="activeItem === item" x-html="item.body" class="p-2 bg-white" x-transition></div>
+                </div>
+            </template>
+        </div>
+
+        <script>
+         document.addEventListener('alpine:init', () => {
+             Alpine.data('accordionData', () => ({
+                 items: [
+                     {title: 'Title 1', body: 'Body 1'},
+                     {title: 'Title 2', body: 'Body 2'},
+                     {title: 'Title 3', body: 'Body 3'},
+                     {title: 'Title 4', body: 'Body 4'}
+                 ],
+                 activeItem: null,
+                 selectItem(item) {
+                     const newActiveItem = this.activeItem === item ? null : item;
+                     this.activeItem = newActiveItem;
+                 }
+             }));
+         });
+        </script>
+    </body>
+</html>

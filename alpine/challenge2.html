@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Codeholic Alpine Challenge 2</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    </head>
+    <body>
+
+        <div x-data="{ bgColor: '', btnText: 'button text', btnId: '' }">
+            <input x-model="btnText">
+            <input x-model="bgColor">
+            <input x-model="btnId">
+
+            <button :id="btnId" :style="{ backgroundColor: bgColor }" x-text="btnText"></button>
+        </div>
+
+    </body>
+</html>

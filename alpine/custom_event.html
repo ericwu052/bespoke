@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Custom Event Alpine</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    </head>
+    <body>
+        <!-- event bubbles, so it can only be captured by the parent, not sibling element. -->
+        <div x-init @increment="console.log('increment triggered')">
+            <button @click="$dispatch('increment')">Increment</button>
+        </div>
+    </body>
+</html>

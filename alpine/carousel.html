@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alpine js Tab</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    </head>
+    <body>
+        <div x-data="carousel">
+            <div class="relative">
+                <template x-for="image in images">
+                    <div x-show="activeImage === image" x-transition class="aspect-w-4 aspect-h-3">
+                        <img :src="image" class="object-cover">
+                    </div>
+                </template>
+                <a @click.prevent="prev" class="absolute left-0 top-1/2 -translate-y-1/2 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </a>
+                <a @click.prevent="next" class="absolute right-0 top-1/2 -translate-y-1/2 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </a>
+            </div>
+            <div class="flex">
+                <template x-for="image in images">
+                    <a class="cursor-pointer w-[80px] border border-gray-300 hover:border-purple-500 flex items-center justify-center" :class="{'border-purple-600': activeImage === image }" @click.prevent="activeImage = image">
+                        <img :src="image" class="object-cover">
+                    </a>
+                </template>
+            </div>
+        </div>
+        <script>
+         document.addEventListener('alpine:init', () => {
+             /* https://picsum.photos/400/300 */
+             Alpine.data('carousel', () => ({
+                 images: ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg'],
+                 activeImage: null,
+                 init() {
+                     this.activeImage = this.images.length > 0 ? this.images[0] : null;
+                 },
+                 next() {
+                     let currentIdx = this.images.indexOf(this.activeImage);
+                     if (currentIdx === this.images.length - 1)
+                         currentIdx = -1;
+                     this.activeImage = this.images[currentIdx + 1];
+                 },
+                 prev() {
+                     let currentIdx = this.images.indexOf(this.activeImage);
+                     if (currentIdx === 0)
+                         currentIdx = this.images.length;
+                     this.activeImage = this.images[currentIdx - 1];
+                 }
+             }));
+         });
+        </script>
+    </body>
+</html>

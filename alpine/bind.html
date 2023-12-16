@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alpine js bind example/title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    </head>
+    <body>
+        <div x-data="{clicked: false}">
+            <button class="bordered" x-bind:class="clicked ? 'yellow' : ''" x-bind:class="clicked ? '' : 'blue'" x-on:click="clicked = !clicked">
+                Click me!
+            </button>
+        </div>
+
+        <style>
+         .bordered {
+             border: 2px solid brown;
+         }
+         .yellow {
+             background-color: yellow;
+         }
+         .blue {
+             background-color: cyan;
+         }
+        </style>
+    </body>
+</html>

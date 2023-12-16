@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Codeholic Alpine Challenge 1</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    </head>
+    <body>
+
+        <div x-data="{colors: ['red', 'green', 'blue', 'yellow', 'brown']}">
+            <template x-for="color in colors">
+                <div class="box" :style="{backgroundColor: color}"></div>
+            </template>
+        </div>
+
+        <style>
+         .box {
+             height: 40px;
+             width: 40px;
+             display: inline-block;
+         }
+        </style>
+
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alpine js Tab</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div x-data="tabsData">
+            <div class="flex">
+                <template x-for="tab in tabs">
+                    <a @click="activeTab = tab" x-text="tab" class="border py-2 px-3 bg-white cursor-pointer" :class="{ 'border-purple-500': activeTab === tab, 'text-blue-500': activeTab === tab }"></a>
+                </template>
+            </div>
+            <div class="bg-white py-2 px-3 border">
+                <div x-show="activeTab === 'Home'">Home Contents</div>
+                <div x-show="activeTab === 'Users'">Users Contents</div>
+                <div x-show="activeTab === 'Settings'">Settings Contents</div>
+            </div>
+        </div>
+        <script>
+         document.addEventListener('alpine:init', () => {
+             Alpine.data('tabsData', () => ({
+                 tabs: ['Home', 'Users', 'Settings'],
+                 activeTab: 'Home'
+             }));
+         });
+        </script>
+    </body>
+</html>
